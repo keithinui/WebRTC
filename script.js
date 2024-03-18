@@ -65,8 +65,8 @@ $(function() {
                     console.log(report.bytesReceived);   // Total recived data volume
 
                 // When report is `RTCCodecStats` Object.
-                if(report.type == "codec") {
-                    console.log(report.clockRate); // 90000
+//                if(report.type == "codec") {
+//                    console.log(report.clockRate); // 90000
                 
                 }
             });
