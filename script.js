@@ -63,8 +63,8 @@ $(function() {
                 // When RTCStatsType of report is `inbount-rtp` Object.
                 if(report.type == "inbound-rtp") {
                     // When Fields is 'bytesReceived'
-                    console.log(report.bytesReceived);   // Total recived data volume of the stream
-                    $('#inbound-video').html('bytesReceived: ' + (report.bytesReceived) + 'kind:' + report.kind);
+                    console.log('b: ' + report.bytesReceived + ' k: ' + report.kind);   // Total recived data volume of the stream
+                    $('#inbound-video').html('bytesReceived: ' + (report.bytesReceived) );
                     bytesReceivedPrevious = report.bytesReceived;
                 }
             });
