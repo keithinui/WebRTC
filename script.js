@@ -61,7 +61,7 @@ $(function() {
             // stats is [{},{},{},...]
             stats.forEach((report) => {
                 // When RTCStatsType of report is `inbount-rtp` Object.
-                if(report.type == "inbound-rtp") {
+                if(report.type == "inbound-rtp" && report.kind == "video") {
                     // When Fields is 'bytesReceived'
                     console.log('b: ' + report.bytesReceived + ' k: ' + report.kind);   // Total recived data volume of the stream
                     $('#inbound-video').html('bytesReceived: ' + (report.bytesReceived) );
