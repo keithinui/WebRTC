@@ -183,7 +183,8 @@ $(function() {
 
     async function getRTCStats2(statsObject){
         // stats is [{},{},{},...]
-        statsObject.forEach((report) => {
+        let stats = await statsObject;
+        stats.forEach((report) => {
             // When report is `RTCCodecStats` Object.
                 if(report.type == "codec") {
             console.log(report.clockRate); // 90000
