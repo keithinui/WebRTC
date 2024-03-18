@@ -55,7 +55,7 @@ $(function() {
 
     // Getting Stats 
     $('#getting-stats').on('click', () => {
-        timer = setInterval(()=>{
+        timer = setInterval(async () => {
             const stats = await existingCall.getPeerConnection().getStats();
             // stats is [{},{},{},...]
             stats.forEach((report) => {
