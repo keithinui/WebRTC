@@ -61,8 +61,8 @@ $(function() {
             stats.forEach((report) => {
                 // When report is `inbount-rtp and video` Object.
 //                if(report.type == "inbound-rtp" && report.kind == "video") {
-//                if(report.id.indexOf('RTCInboundRTPVideoStream') !== -1){
-//                    console.log(report.bytesReceived);   // Total recived data volume
+                if(report.id.indexOf('RTCInboundRTPVideoStream') !== -1){
+                    console.log(report.bytesReceived);   // Total recived data volume
 
                 // When report is `RTCCodecStats` Object.
                 if(report.type == "codec") {
