@@ -60,7 +60,7 @@ $(function() {
             // stats is [{},{},{},...]
             stats.forEach((report) => {
                 // When report is `inbount-rtp and video` Object.
-                if(report.type == "inbound-rtp" && stat.kind == "video") {
+                if(report.type == "inbound-rtp" && report.kind == "video") {
                     console.log(report.bytesReceived);   // Total recived data volume
                 }
             });
