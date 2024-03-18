@@ -57,7 +57,7 @@ $(function() {
     $('#getting-stats').on('click', () => {
         const _PC = existingCall.getPeerConnection();
         timer = setInterval(()=>{
-            getRTCStats(_PC.getStats())
+            getRTCStats2(_PC.getStats())
         },1000);
         step4();
     });
@@ -181,6 +181,10 @@ $(function() {
         $('#stop-acquiring-stats').hide();
     }
 
+    async function getRTCStats2(statsObject){
+        console.log('getStats____________!');
+    }
+    
     async function getRTCStats(statsObject){
 
         let trasportArray = [];
