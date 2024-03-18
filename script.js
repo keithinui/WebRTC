@@ -64,7 +64,7 @@ $(function() {
                 if(report.type == "inbound-rtp") {
                     // When Fields is 'bytesReceived'
                     console.log(report.bytesReceived);   // Total recived data volume of the stream
-                    $('#inbound-video').html('bytesReceived: ' + (report.bytesReceived-bytesReceivedPrevious) );
+                    $('#inbound-video').html('bytesReceived: ' + (report.bytesReceived) + report.type);
                     bytesReceivedPrevious = report.bytesReceived;
                 }
             });
