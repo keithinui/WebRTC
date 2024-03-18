@@ -55,9 +55,15 @@ $(function() {
 
     // Getting Stats 
     $('#getting-stats').on('click', () => {
-        const _PC = existingCall.getPeerConnection();
         timer = setInterval(()=>{
-            getRTCStats2(_PC.getStats())
+            const stats = await existingCall.getPeerConnection().getStats();
+            // stats is [{},{},{},...]
+            stats.forEach((report) => {
+                // When report is `inbount-rtp and video` Object.
+                if(report.type == "inbound-rtp" && stat.kind == "video") {
+                    console.log(report.bytesReceived);   // Total recived data volume
+                }
+            });
         },1000);
         step4();
     });
