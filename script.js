@@ -59,15 +59,10 @@ $(function() {
             const stats = await existingCall.getPeerConnection().getStats();
             // stats is [{},{},{},...]
             stats.forEach((report) => {
-                // When report is `inbount-rtp and video` Object.
-//                if(report.type == "inbound-rtp" && report.kind == "video") {
-                if(report.id.indexOf('RTCInboundRTPVideoStream') !== -1){
-                    console.log(report.bytesReceived);   // Total recived data volume
-
-                // When report is `RTCCodecStats` Object.
-//                if(report.type == "codec") {
-//                    console.log(report.clockRate); // 90000
-                
+                // When RTCStatsType of report is `inbount-rtp` Object.
+                if(report.type == "inbound-rtp") {
+                    // When Fields is 'bytesReceived'
+                    console.log(report.bytesReceived);   // Total recived data volume of the stream
                 }
             });
         },1000);
