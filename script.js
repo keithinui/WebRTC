@@ -308,7 +308,7 @@ $(function() {
         $('#remote-candidate').html(remoteCandidate.ip + ':' + remoteCandidate.port + '(' +remoteCandidate.protocol + ')' + '<BR>type:' + remoteCandidate.candidateType);
         
         $('#inbound-codec').html(inboundVideoCodec.mimeType + '<BR>' + inboundAudioCodec.mimeType);
-        $('#outbound-codec').html(outboundVideoCodec.mimeType + '<BR>' + outboundAudioCodec.mimeType);
+//        $('#outbound-codec').html(outboundVideoCodec.mimeType + '<BR>' + outboundAudioCodec.mimeType);
 
         $('#inbound-audio').html('bytesReceived:' + inboundRTPAudioStreamArray[0].bytesReceived + '<BR>jitter:' + inboundRTPAudioStreamArray[0].jitter + '<BR>fractionLost:' + inboundRTPAudioStreamArray[0].fractionLost);
         $('#inbound-video').html('bytesReceived:' + inboundRTPVideoStreamArray[0].bytesReceived + '<BR>fractionLost:' + inboundRTPVideoStreamArray[0].fractionLost);
