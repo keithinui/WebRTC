@@ -63,6 +63,8 @@ $(function() {
                 if(report.type == "inbound-rtp") {
                     // When Fields is 'bytesReceived'
                     console.log(report.bytesReceived);   // Total recived data volume of the stream
+                    
+                    $('#inbound-video').html('bytesReceived:' + report.bytesReceived);
                 }
             });
         },1000);
@@ -148,16 +150,10 @@ $(function() {
         $('#callto-id').focus();
         $('#getting-stats').show();
         $('#stop-acquiring-stats').hide();
-        $('#local-candidate').text('');
-        $('#remote-candidate').text('');
         $('#inbound-codec').text('');
         $('#outbound-codec').text('');
-        $('#inbound-audio').text('');
         $('#inbound-video').text('');
-        $('#outbound-audio').text('');
         $('#outbound-video').text('');
-        $('#local-audio-video').text('');
-        $('#remote-audio-video').text('');
     }
 
     function step3(call) {
@@ -188,19 +184,7 @@ $(function() {
         $('#stop-acquiring-stats').hide();
     }
 
-    async function getRTCStats2(statsObject){
-        // stats is [{},{},{},...]
-        let stats = await statsObject;
-        stats.forEach((report) => {
-            // When report is `RTCCodecStats` Object.
-                if(report.type == "codec") {
-            console.log(report.clockRate); // 90000
-            }
-        });
-    }
-    
     async function getRTCStats(statsObject){
-
         let trasportArray = [];
         let candidateArray = [];
         let candidatePairArray = [];
@@ -322,20 +306,10 @@ $(function() {
             }
         });       
 
-        $('#local-candidate').html(localCandidate.ip + ':' + localCandidate.port + '(' +localCandidate.protocol + ')' + '<BR>type:' + localCandidate.candidateType);
-        $('#remote-candidate').html(remoteCandidate.ip + ':' + remoteCandidate.port + '(' +remoteCandidate.protocol + ')' + '<BR>type:' + remoteCandidate.candidateType);
-        
 //        $('#inbound-codec').html(inboundVideoCodec.mimeType + '<BR>' + inboundAudioCodec.mimeType);
 //        $('#outbound-codec').html(outboundVideoCodec.mimeType + '<BR>' + outboundAudioCodec.mimeType);
-
-//        $('#inbound-audio').html('bytesReceived:' + inboundRTPAudioStreamArray[0].bytesReceived + '<BR>jitter:' + inboundRTPAudioStreamArray[0].jitter + '<BR>fractionLost:' + inboundRTPAudioStreamArray[0].fractionLost);
 //        $('#inbound-video').html('bytesReceived:' + inboundRTPVideoStreamArray[0].bytesReceived + '<BR>fractionLost:' + inboundRTPVideoStreamArray[0].fractionLost);
-        
-//        $('#outbound-audio').html('bytesSent:' + outboundRTPAudioStreamArray[0].bytesSent);
 //        $('#outbound-video').html('bytesSent:' + outboundRTPVideoStreamArray[0].bytesSent);
-
-//        $('#local-audio-video').html('audioLevel:' + mediaStreamTrack_local_audioArray[0].audioLevel + '<BR>frameHeight:' + mediaStreamTrack_local_videoArray[0].frameHeight + '<BR>frameWidth:' + mediaStreamTrack_local_videoArray[0].frameWidth + '<BR>framesSent:' + mediaStreamTrack_local_videoArray[0].framesSent);
-//        $('#remote-audio-video').html('audioLevel:' + mediaStreamTrack_remote_audioArray[0].audioLevel + '<BR>frameHeight:' + mediaStreamTrack_local_videoArray[0].frameHeight + '<BR>frameWidth:' + mediaStreamTrack_remote_videoArray[0].frameWidth);
 
     }
 });
