@@ -9,7 +9,6 @@ $(function() {
     let localStream;
     let existingCall;
     let timer;
-    let bytesReceivedPrevious = 0;     // Previous sample data of bytesReceived 
 
     peer.on('open', () => {
         $('#my-id').text(peer.id);
@@ -56,6 +55,7 @@ $(function() {
 
     // Getting Stats 
     $('#getting-stats').on('click', () => {
+        let bytesReceivedPrevious = 0;     // Previous sample data of bytesReceived 
         timer = setInterval(async () => {
             const stats = await existingCall.getPeerConnection().getStats();
             // stats is [{},{},{},...]
@@ -64,7 +64,8 @@ $(function() {
                 if(report.type == "inbound-rtp" && report.kind == "video") {
                     // When Fields is 'bytesReceived'
                     console.log(report.bytesReceived);   // Total recived data volume of the stream
-                    $('#inbound-video').html('bytesReceived[Mbps]: ' + (report.bytesReceived-bytesReceivedPrevious)*8/1024/1024 );
+                    let buf = (report.bytesReceived - bytesReceivedPrevious)*8/1024/1024;
+                    $('#inbound-video').html('bytesReceived[Mbps]: ' + buf.toFixed(2) );
                     bytesReceivedPrevious = report.bytesReceived;
                 }
             });
