@@ -60,11 +60,11 @@ $(function() {
             const stats = await existingCall.getPeerConnection().getStats();
             // stats is [{},{},{},...]
             stats.forEach((report) => {
-                // When RTCStatsType of report is `inbount-rtp` Object.
+                // When RTCStatsType of report is `inbount-rtp` Object and kind is 'video'.
                 if(report.type == "inbound-rtp" && report.kind == "video") {
                     // When Fields is 'bytesReceived'
-                    console.log('b: ' + report.bytesReceived + ' k: ' + report.kind);   // Total recived data volume of the stream
-                    $('#inbound-video').html('bytesReceived: ' + (report.bytesReceived) );
+                    console.log(report.bytesReceived);   // Total recived data volume of the stream
+                    $('#inbound-video').html('bytesReceived[Mbps]: ' + (report.bytesReceived-bytesReceivedPrevious)*8/1024/1024 );
                     bytesReceivedPrevious = report.bytesReceived;
                 }
             });
