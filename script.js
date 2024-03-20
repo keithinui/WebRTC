@@ -53,9 +53,9 @@ $('#end-call').click(function(){
 $('#getting-stats').on('click', () => {
     let bytesReceivedPrevious = 0;     // Previous sample data of bytesReceived 
     let bytesSentPrevious = 0;         // Previous sample data of bytesSent 
-    timer = setInterval(async () => {
+//    timer = setInterval(async () => {
             console.log("Timer!!!!"); 
-    },1000);
+//    },1000);
     $('#getting-stats').hide();
     $('#stop-acquiring-stats').show();
 });
