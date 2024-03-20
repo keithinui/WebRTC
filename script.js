@@ -10,6 +10,7 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
         // Success
         $('#my-video').get(0).srcObject = stream;
         localStream = stream;
+        setupDefaultUI();        // Set to default UI
     }).catch(function (error) {
     // Error
     console.error('mediaDevice.getUserMedia() error:', error);
@@ -27,6 +28,7 @@ peer.on('open', function(){
 
 peer.on('error', function(err){
     alert(err.message);
+    setupDefaultUI();        // Set to default UI
 });
 
 peer.on('close', function(){
@@ -43,12 +45,62 @@ $('#make-call').submit(function(e){
 
 $('#end-call').click(function(){
     existingCall.close();
+    clearInterval(timer);
+    setupDefaultUI();        // Set to default UI
+});
+
+// Getting Stats 
+$('#getting-stats').on('click', () => {
+    let bytesReceivedPrevious = 0;     // Previous sample data of bytesReceived 
+    let bytesSentPrevious = 0;         // Previous sample data of bytesSent 
+    timer = setInterval(async () => {
+        const stats = await existingCall.getPeerConnection().getStats();
+        // stats is [{},{},{},...]
+        stats.forEach((report) => {
+            // When RTCStatsType of report is `inbount-rtp` Object and kind is 'video'.
+            if(report.type == "inbound-rtp" && report.kind == "video") {
+                // When Fields is 'bytesReceived'
+                console.log(report.bytesReceived);   // Total recived data volume of the stream
+                let buf = (report.bytesReceived - bytesReceivedPrevious)*8/1024/1024;
+                $('#inbound-video').html('bytesReceived[Mbps]: ' + buf.toFixed(2) );
+                bytesReceivedPrevious = report.bytesReceived;
+            }
+
+            // When RTCStatsType of report is `outbount-rtp` Object and kind is 'video'.
+            if(report.type == "outbound-rtp" && report.kind == "video") {
+                // When Fields is 'bytesSent'
+                console.log(report.bytesSent);   // Total sent data volume of the stream
+                let buf = (report.bytesSent - bytesSentPrevious)*8/1024/1024;
+                $('#outbound-video').html('bytesSent[Mbps]: ' + buf.toFixed(2) );
+                bytesSentPrevious = report.bytesSent;
+            }
+        });
+    },1000);
+    $('#getting-stats').hide();
+    $('#stop-acquiring-stats').show();
+});
+
+// Stop acquiring stats
+$('#stop-acquiring-stats').on('click', () => {
+    clearInterval(timer);
+        $('#getting-stats').show();
+        $('#stop-acquiring-stats').hide();
 });
 
 peer.on('call', function(call){
     call.answer(localStream);
     setupCallEventHandlers(call);
 });
+
+function setupDefaultUI(){
+    $('#callto-id').focus();
+    $('#getting-stats').show();
+    $('#stop-acquiring-stats').hide();
+    $('#inbound-codec').text('');
+    $('#outbound-codec').text('');
+    $('#inbound-video').text('');
+    $('#outbound-video').text('');
+}
 
 function setupCallEventHandlers(call){
     if (existingCall) {
