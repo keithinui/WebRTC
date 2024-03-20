@@ -75,7 +75,7 @@ $(function() {
                     // When Fields is 'bytesSent'
                     console.log(report.bytesSent);   // Total sent data volume of the stream
                     let buf = (report.bytesSent - bytesSentPrevious)*8/1024/1024;
-                    $('#inbound-video').html('bytesSent[Mbps]: ' + buf.toFixed(2) );
+                    $('#outbound-video').html('bytesSent[Mbps]: ' + buf.toFixed(2) );
                     bytesSentPrevious = report.bytesSent;
                 }
             });
