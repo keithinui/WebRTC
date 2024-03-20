@@ -56,6 +56,7 @@ $(function() {
     // Getting Stats 
     $('#getting-stats').on('click', () => {
         let bytesReceivedPrevious = 0;     // Previous sample data of bytesReceived 
+        let bytesSentPrevious = 0;         // Previous sample data of bytesSent 
         timer = setInterval(async () => {
             const stats = await existingCall.getPeerConnection().getStats();
             // stats is [{},{},{},...]
@@ -67,6 +68,15 @@ $(function() {
                     let buf = (report.bytesReceived - bytesReceivedPrevious)*8/1024/1024;
                     $('#inbound-video').html('bytesReceived[Mbps]: ' + buf.toFixed(2) );
                     bytesReceivedPrevious = report.bytesReceived;
+                }
+
+                // When RTCStatsType of report is `outbount-rtp` Object and kind is 'video'.
+                if(report.type == "outbound-rtp" && report.kind == "video") {
+                    // When Fields is 'bytesSent'
+                    console.log(report.bytesSent);   // Total sent data volume of the stream
+                    let buf = (report.bytesSent - bytesSentPrevious)*8/1024/1024;
+                    $('#inbound-video').html('bytesSent[Mbps]: ' + buf.toFixed(2) );
+                    bytesSentPrevious = report.bytesSent;
                 }
             });
         },1000);
