@@ -142,18 +142,18 @@ $(function() {
 
         navigator.mediaDevices.getUserMedia(constraints).then(stream => {
             $('#my-video').get(0).srcObject = stream;
-        localStream = stream;
+            localStream = stream;
 
-        if (existingCall) {
-            existingCall.replaceStream(stream);
-            return;
-        }
+            if (existingCall) {
+                existingCall.replaceStream(stream);
+                return;
+            }
 
-        step2();
-    }).catch(err => {
+            step2();
+        }).catch(err => {
             $('#step1-error').show();
-        console.error(err);
-    });
+            console.error(err);
+        });
     }
 
     function step2() {
