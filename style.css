@@ -58,28 +58,10 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
     text-align: center;
 }
 
-#step1-error, #step2, #step3 {
+#end-call {
     display: none;
 }
+
 #my-id {
     font-weight: bold;
-}
-
-table , td, th {
-	border: 1px solid #595959;
-	border-collapse: collapse;
-}
-td, th {
-	padding: 3px;
-	width: 30px;
-	height: 25px;
-}
-th {
-	background: #f0e6cc;
-}
-.even {
-	background: #fbf8f0;
-}
-.odd {
-	background: #fefcf9;
 }
