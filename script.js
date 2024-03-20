@@ -3,6 +3,7 @@
 let localStream = null;
 let peer = null;
 let existingCall = null;
+let timer;
 
 navigator.mediaDevices.getUserMedia({video: true, audio: true})
     .then(function (stream) {
