@@ -50,7 +50,7 @@ $('#end-call').click(function(){
 });
 
 // Getting Stats 
-$('#getting-stats').on('click', () => {
+$('#getting-stats').click(function(){
     let bytesReceivedPrevious = 0;     // Previous sample data of bytesReceived 
     let bytesSentPrevious = 0;         // Previous sample data of bytesSent 
 //    timer = setInterval(async () => {
@@ -61,7 +61,7 @@ $('#getting-stats').on('click', () => {
 });
 
 // Stop acquiring stats
-$('#stop-acquiring-stats').on('click', () => {
+$('#stop-acquiring-stats').click(function(){
     clearInterval(timer);
         $('#getting-stats').show();
         $('#stop-acquiring-stats').hide();
